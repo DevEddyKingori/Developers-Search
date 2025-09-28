@@ -18,14 +18,21 @@ The primary objective is to create a dedicated niche for developers to connect, 
 
 ### Visual References
 
-##### Login Page
-![Login Page](https://github.com/user-attachments/assets/c94dad3b-3e2e-477f-958a-f0b5181d0de4)
+#### Sign Up Page
 
-##### Profile Page
-![image](https://github.com/user-attachments/assets/103661ee-30ca-44e6-8ffe-8b0269b448c0)
+![Sign Up Page](Docs/sign-up-page.png)
 
-##### Message Inbox Page
-![image](https://github.com/user-attachments/assets/69e9afef-0f82-49d0-b1a8-340088a62989)
+#### Login Page
+
+![Login Page](Docs/login-page.png)
+
+#### Profile Page
+
+![Profile Page](Docs/profile-page.png)
+
+#### Celery Notifications
+
+![Celery Notifications](Docs/celery-notifications.png)
 
 ### Features
 
