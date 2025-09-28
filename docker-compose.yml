@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: devsearch
     command: >
-      sh -c "python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8000"
+      sh -c "python devsearch/manage.py migrate &&
+            python devsearch/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
@@ -20,31 +20,29 @@ services:
       - .env
 
   db:
-    image: mysql:8.0
+    image: postgres:15
     container_name: devsearch_db
     restart: always
     environment:
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USER}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
-      - "3306:3306"
+      - "5436:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "pg_isready -U devuser -d devsearch"]
       interval: 10s
+      timeout: 5s
       retries: 5
-      start_period: 30s
-      timeout: 10s
 
   redis:
     image: redis:7
     container_name: devsearch_redis
     restart: always
     ports:
-      - "6379:6379"
+      - "6380:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -75,4 +73,4 @@ services:
       - redis
 
 volumes:
-  mysql_data:
+  postgres_data:
